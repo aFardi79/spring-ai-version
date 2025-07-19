@@ -23,8 +23,13 @@ public class ChatClientApi {
                 .body(ollamaRequest)
                 .retrieve()
                 .body(OllamaResponse.class);
-        String finalResponse = response.response.substring(response.response.lastIndexOf("</think>") + 8, response.response.length());
-         return finalResponse;
+
+        String body = response.response;
+        int marker = body.lastIndexOf("</think>");
+        if (marker >= 0) {
+            return body.substring(marker + 8);
+        }
+        return body;
     }
 
 
