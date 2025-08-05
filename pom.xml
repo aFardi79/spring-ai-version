@@ -16,8 +16,6 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <spring.boot.version>3.5.0</spring.boot.version>
-    <spring.ai.version>1.0.0</spring.ai.version> <!-- Best compatible Spring AI version found -->
-
   </properties>
 
   <dependencies>

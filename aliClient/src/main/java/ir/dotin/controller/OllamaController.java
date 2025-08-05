@@ -2,6 +2,8 @@ package ir.dotin.controller;
 
 
 import ir.dotin.service.ChatClientApi;
+import ir.dotin.service.DeepSeekAiClientService;
+import ir.dotin.service.OllamaChatClientApiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -20,10 +22,24 @@ public class OllamaController {
     private ChatClientApi chatClientApi;
 
 
+    @Autowired
+    private OllamaChatClientApiService ollamaChatClientApiService;
 
-    @PostMapping("/sendMessage/{message}")
-    public ResponseEntity<String> sendMessage(@PathVariable("message") String message) {
+    @Autowired
+    private DeepSeekAiClientService  deepSeekAiClientService;
+
+
+
+    @PostMapping("/sendPureMessage/{message}")
+    public ResponseEntity<String> sendMessage(@RequestBody String message) {
        return new ResponseEntity<>(chatClientApi.sendMessage(message),new HttpHeaders(), HttpStatus.OK);
+    }
+
+
+
+    @PostMapping("/sendOllamaMessage/{message}")
+    public ResponseEntity<String> sendMessageOllama(@RequestBody String message) {
+        return new ResponseEntity<>(ollamaChatClientApiService.sendMessageWithChat(message),new HttpHeaders(), HttpStatus.OK);
     }
 
     @PostMapping("/request/{message}")
@@ -31,10 +47,21 @@ public class OllamaController {
         return new ResponseEntity<>(message,new HttpHeaders(), HttpStatus.OK);
     }
 
+    @PostMapping("/sendPureMessage/JavaApiStram")
+    public ResponseEntity<String> sendMessageJavaApiStram(@RequestBody String message) {
+        return new ResponseEntity<>(chatClientApi.sendJavaApiStreamMessage(message),new HttpHeaders(), HttpStatus.OK);
+    }
+
     @GetMapping("/reDirect")
     public RedirectView setRedirect() {
         RedirectView redirectView = new RedirectView();
         redirectView.setUrl("http://localhost:3000/redirect");
         return redirectView;
+    }
+
+
+    @PostMapping("/sendPureMessage/DeepSeekApiClient")
+    public String getDeepSeekApiClientMessage(@RequestBody String message) {
+       return deepSeekAiClientService.getDeepSeekApiClientMessage(message);
     }
 }
