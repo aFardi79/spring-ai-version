@@ -64,4 +64,17 @@ public class OllamaController {
     public String getDeepSeekApiClientMessage(@RequestBody String message) {
        return deepSeekAiClientService.getDeepSeekApiClientMessage(message);
     }
+
+    @PostMapping("/sendPureMessage/callBitBucket")
+    public String getCallBitBucketMessage(@RequestBody String message) {
+        return deepSeekAiClientService.getDeepSeekApiChatBitbucketMessage(message);
+    }
+
+
+    @GetMapping("/sendPureMessage/checkOpenSession")
+    public String checkOpenSession() {
+        return deepSeekAiClientService.getOpenSessionSecarioFromfile();
+    }
+
+
 }

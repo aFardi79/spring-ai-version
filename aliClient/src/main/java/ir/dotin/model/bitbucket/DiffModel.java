@@ -1,0 +1,20 @@
+package ir.dotin.model.bitbucket;
+
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class DiffModel {
+        private String fromHash;
+        private String toHash;
+        private int contextLines;
+        private String whitespace;
+        private List<Diff> diffs;
+        private boolean truncated;
+}
