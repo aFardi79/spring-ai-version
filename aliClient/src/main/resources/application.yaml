@@ -6,3 +6,9 @@ spring:
       base-url: http://localhost:11434
       chat:
         model: deepseek-r1:8b
+deepseek:
+  api:
+    key: ${DEEPSEEK_API_KEY:}
+bitbucket:
+  api:
+    key: ${BITBUCKET_API_KEY:}
