@@ -1,8 +1,11 @@
+
 server:
   port: 8080
-spring:
-  ai:
-    ollama:
-      base-url: http://localhost:11434
-      chat:
-        model: deepseek-r1:8b
+
+bitbucket:
+  api-url: http://localhost:7990/rest/api/1.0
+  token: BBDC-MzUxNzA4MjQ1MDYyOltZx6ih/UEm+5uE21G2XmJ/LP+c
+
+deepseek:
+  base-url: https://api.deepseek.com/v1
+  api-key: sk-6c97f1e767804952a92d5f2344c9e22f
