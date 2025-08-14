@@ -8,7 +8,7 @@ spring:
         model: deepseek-r1:8b
 deepseek:
   api:
-    key: ${DEEPSEEK_API_KEY:}
+    key: ${DEEPSEEK_API_KEY:sk-6c97f1e767804952a92d5f2344c9e22f}
 bitbucket:
   api:
-    key: ${BITBUCKET_API_KEY:}
+    key: ${BITBUCKET_API_KEY:BBDC-ODUwNDAzNDA3NDE3OpmuV2FmSoBVmoFfz7k1D8MAvN2z}

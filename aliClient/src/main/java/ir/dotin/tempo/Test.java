@@ -5,11 +5,13 @@ public class Test {
 
     public static void main(String[] args) {
         HibernateSession session = HibernateManager.createSession();
-        try{
+        doWork(session);
+    }
 
-        }finally {
-            session.close();
-        }
+
+    public static void  doWork(HibernateSession session){
+        session.CreateQuery();
+        session.close();
     }
 
 }
