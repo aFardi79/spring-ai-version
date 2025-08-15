@@ -39,8 +39,8 @@ public class BitbucketClient {
     }
 
     public void rejectPullRequest(String projectKey, String repoSlug, Long pullRequestId) {
-        String url = String.format("%s/projects/%s/repos/%s/pull-requests/%d/approve", bitbucketProperties.getApiUrl(), projectKey, repoSlug, pullRequestId);
-        restTemplate.exchange(url, HttpMethod.DELETE, new HttpEntity<>(createHeaders()), String.class);
+        String url = String.format("%s/projects/%s/repos/%s/pull-requests/%d/decline?version=0", bitbucketProperties.getApiUrl(), projectKey, repoSlug, pullRequestId);
+        restTemplate.exchange(url, HttpMethod.POST, new HttpEntity<>(createHeaders()), String.class);
     }
 
     private HttpHeaders createHeaders() {

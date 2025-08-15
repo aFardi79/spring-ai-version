@@ -27,10 +27,21 @@ public class CodeReviewer {
 
             **Review Instructions:**
             1.  Analyze the code changes for quality, best practices, potential bugs, and adherence to project standards.
-            2.  Consider the context provided by the pull request title and description.
-            3.  Provide a final decision: `APPROVE` or `REJECT`.
-            4.  Provide a concise summary of your reasoning.
-            5.  If you suggest rejection or have specific feedback, provide clear, actionable comments.
+            2.  Pay special attention to Hibernate session management:
+                   - Detect any occurrence where a Hibernate session is opened using:
+                   - HibernateSession <var> = HibernateManager.createSession();
+                   - Check if that session is not properly closed in all control-flow paths.
+                   - If the session is passed to another method in the same class, verify that the callee (and any further same-class callees) close the session parameter.
+                   - try-with-resources counts as closed.
+                   - Closing any alias variable of the session counts as closing it.
+                   - If a session escapes the class (returned or stored in a field) without being closed, treat it as a leak.
+                   - Ignore strings/comments and framework-managed scopes (@Transactional) unless HibernateManager.createSession() is explicitly called.
+            3. If such a session leak is found:
+                - Extract and output ONLY the raw smallest enclosing method or code block where the session may leak.
+                - Do not explain the leak in the code block output.
+            4.  Provide your final decision: APPROVE or REJECT.
+            5.  Provide a concise summary of your reasoning.
+            6.  If you reject or have feedback, provide clear, actionable comments.
 
             **Output Format:**
             DECISION: [APPROVE/REJECT]

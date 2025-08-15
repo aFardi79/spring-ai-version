@@ -4,7 +4,7 @@ server:
 
 bitbucket:
   api-url: http://localhost:7990/rest/api/1.0
-  token: BBDC-MzUxNzA4MjQ1MDYyOltZx6ih/UEm+5uE21G2XmJ/LP+c
+  token: BBDC-ODUwNDAzNDA3NDE3OpmuV2FmSoBVmoFfz7k1D8MAvN2z
 
 deepseek:
   base-url: https://api.deepseek.com/v1
