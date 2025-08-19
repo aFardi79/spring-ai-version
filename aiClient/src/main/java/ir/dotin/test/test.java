@@ -4,5 +4,6 @@ public class test {
 
     public static void main(String[] args) {
         HibernateSession session = HibernateManager.createSession();
+        session.close();
     }
 }

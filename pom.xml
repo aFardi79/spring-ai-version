@@ -10,7 +10,7 @@
   <name>spring-ai-test</name>
   <url>http://maven.apache.org</url>
   <modules>
-    <module>aliClient</module>
+    <module>aiClient</module>
   </modules>
 
   <properties>

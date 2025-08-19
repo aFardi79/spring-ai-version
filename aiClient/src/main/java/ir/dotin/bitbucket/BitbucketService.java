@@ -2,6 +2,7 @@
 package ir.dotin.bitbucket;
 
 import ir.dotin.ai.CodeReviewer;
+import ir.dotin.config.PromtConfiguration;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -9,10 +10,12 @@ public class BitbucketService {
 
     private final BitbucketClient bitbucketClient;
     private final CodeReviewer codeReviewer;
+    private final PromtConfiguration promtConfiguration;
 
-    public BitbucketService(BitbucketClient bitbucketClient, CodeReviewer codeReviewer) {
+    public BitbucketService(BitbucketClient bitbucketClient, CodeReviewer codeReviewer, PromtConfiguration promtConfiguration) {
         this.bitbucketClient = bitbucketClient;
         this.codeReviewer = codeReviewer;
+        this.promtConfiguration = promtConfiguration;
     }
 
     public void processPullRequestEvent(PullRequestEvent event) {
@@ -22,8 +25,12 @@ public class BitbucketService {
 
         PullRequestDetails details = bitbucketClient.getPullRequest(projectKey, repoSlug, pullRequestId);
         String diff = bitbucketClient.getPullRequestDiff(projectKey, repoSlug, pullRequestId);
-
-        String review = codeReviewer.review(details.getTitle(), details.getDescription(), diff);
+        String review = "";
+        if (promtConfiguration.isOpenSession()) {
+            review = codeReviewer.reviewOpenSession(details.getTitle(), details.getDescription(), diff);
+        } else {
+            review = codeReviewer.review(details.getTitle(), details.getDescription(), diff);
+        }
 
         bitbucketClient.postComment(projectKey, repoSlug, pullRequestId, review);
 

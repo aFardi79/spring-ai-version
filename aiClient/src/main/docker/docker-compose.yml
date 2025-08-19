@@ -1,0 +1,30 @@
+services:
+  git-mcp:
+    image: node:20
+    working_dir: /srv
+    command: ["npx","-y","@cyanheads/git-mcp-server@latest",
+              "--transport","sse","--host","0.0.0.0","--port","9001"]
+    environment:
+      GIT_MCP_ROOT: /repos
+    volumes:
+      - ./repos:/repos
+      - ~/.ssh:/root/.ssh:ro     # for SSH pushes
+    ports:
+      - "9001:9001"
+    restart: unless-stopped
+
+  # OPTIONAL: Bitbucket MCP for PR ops (only if your chosen package supports SSE runtime flags)
+  bitbucket-mcp:
+    image: node:20
+    working_dir: /srv
+    # Replace "bitbucket-mcp@latest" and flags per your chosen server's README.
+    command: ["npx","-y","bitbucket-mcp@latest",
+              "--transport","sse","--host","0.0.0.0","--port","9002"]
+    environment:
+      # Point to your on‑prem Bitbucket (Server/DC), default UI port is 7990.
+      BITBUCKET_BASE_URL: "http://localhost:7990"
+      BITBUCKET_USERNAME: "a.fardi"
+      BITBUCKET_PASSWORD: "BitaJanami82794553$%"
+    ports:
+      - "9002:9002"
+    restart: unless-stopped

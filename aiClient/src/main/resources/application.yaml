@@ -1,11 +1,14 @@
 
 server:
-  port: 8080
+  port: 9090
 
 bitbucket:
   api-url: http://localhost:7990/rest/api/1.0
-  token: BBDC-ODUwNDAzNDA3NDE3OpmuV2FmSoBVmoFfz7k1D8MAvN2z
+  token: BBDC-MDQ3NTA2MTM5Nzk1OpxFawnHyJHmWX4z5IfIZcXsergi
 
 deepseek:
   base-url: https://api.deepseek.com/v1
   api-key: sk-6c97f1e767804952a92d5f2344c9e22f
+
+promt-config:
+  open-session : false
